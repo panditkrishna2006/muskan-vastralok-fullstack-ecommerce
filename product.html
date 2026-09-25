@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Product Details | Muskan Vastralok</title>
+
+    <!-- Premium Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Hind:wght@400;500;600;700&family=Lora:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- Main Website CSS -->
+    <link rel="stylesheet" href="CSS/style.css">
+
+    <!-- Product Page CSS -->
+    <link rel="stylesheet" href="CSS/product.css">
+
+<style>
+
+/* ===== PRODUCT PAGE OVERRIDES ===== */
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;width:100%;min-height:100%;overflow-x:hidden}
+body{background:#FBF3E7;color:#3A292E}
+.product-page{width:100%;min-height:100vh;background:#FBF3E7}
+.product-container{width:90%;max-width:1380px;margin:0 auto;padding:18px 0 70px}
+.product-breadcrumb{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:22px;font:12px "Lora",serif;color:#806D72}
+.product-breadcrumb a{color:#3B0C17;text-decoration:none}.product-breadcrumb a:hover{color:#C6A15B}
+.product-main{display:grid;grid-template-columns:minmax(0,1.04fr) minmax(420px,.96fr);gap:58px;align-items:start}
+.product-gallery{min-width:0}
+.product-thumbnails{display:flex;gap:12px;margin-bottom:14px}
+.thumbnail{width:78px;height:96px;padding:0;overflow:hidden;border:1px solid #DECBC2;border-radius:9px;background:#F6EBDD;cursor:pointer;opacity:.72;transition:.25s}
+.thumbnail:hover,.thumbnail.active{opacity:1;border-color:#3B0C17;transform:translateY(-2px)}
+.thumbnail img{width:100%;height:100%;display:block;object-fit:cover}
+.main-product-image{position:relative;width:100%;overflow:hidden;border:1px solid rgba(198,161,91,.28);border-radius:16px;background:#F6EBDD;box-shadow:0 18px 42px rgba(59,12,23,.08)}
+.main-product-image img{display:block;width:100%;height:auto;aspect-ratio:3/4;object-fit:cover}
+.product-detail-badge{position:absolute;top:18px;left:18px;z-index:2;padding:8px 12px;border-radius:20px;background:#3B0C17;color:#F6EBDD;font:700 10px "Lora",serif;letter-spacing:.8px}
+.product-image-wishlist{position:absolute;top:16px;right:16px;z-index:2;width:42px;height:42px;border:1px solid rgba(198,161,91,.4);border-radius:50%;background:rgba(251,243,231,.94);color:#3B0C17;font-size:21px;cursor:pointer}
+.product-image-wishlist.active,.product-image-wishlist:hover{background:#3B0C17;border-color:#3B0C17;color:#C6A15B}
+.product-details{min-width:0;padding-top:8px}
+.product-kicker{display:inline-block;margin-bottom:12px;color:#9B7A4A;font:700 10px "Lora",serif;letter-spacing:1.7px}
+.product-details h1{margin:0;color:#3B0C17;font:600 clamp(42px,4.2vw,60px)/.98 "Cormorant Garamond",serif}
+.product-short-description{max-width:620px;margin:18px 0;color:#6E5B61;font:14px/1.85 "Lora",serif}
+.product-rating{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:22px;color:#766269;font:11px "Lora",serif}
+.product-rating .stars{color:#C6A15B;font-size:17px;letter-spacing:2px}
+.verified-label{padding-left:10px;border-left:1px solid #D8C7BF}
+.product-price-block{padding:21px 0;border-top:1px solid #E1CEC4;border-bottom:1px solid #E1CEC4}
+.product-prices{display:flex;align-items:baseline;flex-wrap:wrap;gap:12px}
+.product-sale-price{color:#3B0C17;font:700 31px "Lora",serif}.product-old-price{color:#99868B;font:14px "Lora",serif}
+.product-discount{padding:5px 8px;border-radius:5px;background:#E9C8C8;color:#3B0C17;font:700 10px "Lora",serif}
+.save-amount{margin:8px 0 0;color:#7A666C;font:11px "Lora",serif}
+.exchange-guarantee{display:flex;align-items:center;gap:10px;margin-top:18px;padding:12px 13px;border:1px solid rgba(198,161,91,.25);border-radius:9px;background:rgba(233,200,200,.25)}
+.guarantee-icon{width:30px;height:30px;flex:0 0 30px;display:grid;place-items:center;border-radius:50%;background:#3B0C17;color:#C6A15B}
+.exchange-guarantee strong{display:block;color:#3B0C17;font:700 11px "Lora",serif}
+.exchange-guarantee p{margin:3px 0 0;color:#7A666C;font:10px "Lora",serif}
+.product-availability{display:flex;align-items:center;flex-wrap:wrap;gap:7px;margin-top:16px;color:#5D4B51;font:11px "Lora",serif}
+.availability-dot{width:8px;height:8px;border-radius:50%;background:#4B7A53}.product-availability strong{color:#4B7A53}
+.quantity-section{display:flex;align-items:center;justify-content:space-between;margin-top:24px}
+.quantity-section>span{color:#3B0C17;font:700 12px "Lora",serif}
+.quantity-control{display:flex;align-items:center;overflow:hidden;height:44px;border:1px solid #D8C5BD;border-radius:7px;background:#F6EBDD}
+.quantity-control button{width:42px;height:100%;border:0;background:transparent;color:#3B0C17;font-size:18px;cursor:pointer}
+.quantity-control button:hover{background:#E9C8C8}
+.quantity-control span{min-width:40px;text-align:center;color:#3B0C17;font:700 12px "Lora",serif}
+.purchase-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:15px}
+.purchase-actions button{min-height:49px;border-radius:7px;font:700 12px "Lora",serif;cursor:pointer}
+.add-to-cart-main{border:1px solid #3B0C17;background:#3B0C17;color:#F6EBDD}.buy-now-main{border:1px solid #C6A15B;background:transparent;color:#3B0C17}
+.add-to-cart-main:hover{background:#C6A15B;border-color:#C6A15B;color:#3B0C17}.buy-now-main:hover{background:#E9C8C8;border-color:#3B0C17}
+.pincode-box{margin-top:17px;padding:16px;border:1px solid #E0CEC5;border-radius:9px;background:rgba(246,235,221,.6)}
+.pincode-heading{display:flex;justify-content:space-between;gap:10px;margin-bottom:9px}
+.pincode-heading span{color:#3B0C17;font:700 11px "Lora",serif}.pincode-heading small{color:#8B777D;font:10px "Lora",serif}
+.pincode-input-row{display:flex;gap:8px}
+#pincodeInput{flex:1;min-width:0;height:42px;padding:0 12px;border:1px solid #D8C5BD;border-radius:6px;outline:none;background:#FBF3E7;color:#3B0C17;font:11px "Lora",serif}
+#checkPincode{height:42px;padding:0 16px;border:1px solid #3B0C17;border-radius:6px;background:#3B0C17;color:#F6EBDD;font:700 10px "Lora",serif;cursor:pointer}
+.pincode-result{min-height:16px;margin-top:8px;color:#5E4A51;font:10px/1.55 "Lora",serif}
+.product-support{display:flex;align-items:center;gap:10px;margin-top:13px}.product-support a{color:#3B0C17;font:700 11px "Lora",serif}.product-support span{color:#8A767C;font:10px "Lora",serif}
+
+.product-information{margin-top:72px;padding-top:33px;border-top:1px solid #E0CEC5}
+.information-tabs{display:flex;gap:30px;overflow-x:auto;border-bottom:1px solid #DCC9C1;scrollbar-width:none}.information-tabs::-webkit-scrollbar{display:none}
+.info-tab{position:relative;padding:0 0 13px;border:0;background:transparent;color:#806D72;font:600 12px "Lora",serif;white-space:nowrap;cursor:pointer}
+.info-tab:after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:2px;background:#3B0C17;transform:scaleX(0);transform-origin:left;transition:.25s}
+.info-tab:hover,.info-tab.active{color:#3B0C17}.info-tab.active:after{transform:scaleX(1)}
+.info-panel{display:none;padding-top:27px}.info-panel.active{display:block}
+.spec-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));border-top:1px solid #E2D1C9;border-left:1px solid #E2D1C9}
+.spec-item{display:grid;grid-template-columns:155px 1fr;min-height:50px;border-right:1px solid #E2D1C9;border-bottom:1px solid #E2D1C9}
+.spec-item span,.spec-item strong{display:flex;align-items:center;padding:10px 12px;font:10px "Lora",serif}.spec-item span{background:#F6EBDD;color:#3B0C17;font-weight:700}.spec-item strong{background:#FBF3E7;color:#6E5B61}
+.info-panel h3{margin:0 0 12px;color:#3B0C17;font:600 26px "Cormorant Garamond",serif}
+.info-panel p,.info-panel li{max-width:850px;color:#6E5B61;font:11px/1.8 "Lora",serif}.info-panel ul{margin:0;padding-left:19px}
+
+.product-trust-strip{display:grid;grid-template-columns:repeat(4,1fr);margin-top:58px;border-top:1px solid #E0CEC5;border-bottom:1px solid #E0CEC5}
+.product-trust-strip>div{display:grid;grid-template-columns:auto 1fr;grid-template-rows:auto auto;gap:0 10px;align-items:center;padding:20px 18px;border-right:1px solid #E0CEC5}
+.product-trust-strip>div:last-child{border-right:0}.product-trust-strip>div>span{grid-row:1/3;width:36px;height:36px;display:grid;place-items:center;border-radius:50%;background:#E9C8C8;color:#3B0C17}
+.product-trust-strip strong{color:#3B0C17;font:700 10px "Lora",serif}.product-trust-strip small{color:#806D72;font:9px "Lora",serif}
+.product-footer{padding:34px 5%;background:#3B0C17;color:#F6EBDD;text-align:center}.product-footer-inner h3{margin:0 0 7px;color:#F6EBDD;font:600 28px "Cormorant Garamond",serif}.product-footer-inner p{margin:0 0 12px;color:#E9C8C8;font:10px "Lora",serif}.product-footer-inner a{color:#C6A15B;font:10px "Lora",serif}
+.product-toast{position:fixed;right:22px;bottom:22px;z-index:9999;padding:12px 17px;border-radius:7px;background:#3B0C17;color:#F6EBDD;font:11px "Lora",serif;box-shadow:0 12px 30px rgba(0,0,0,.18);opacity:0;transform:translateY(12px);pointer-events:none;transition:.3s}
+.product-toast.show{opacity:1;transform:translateY(0)}
+@media(max-width:1000px){.product-main{grid-template-columns:1fr 1fr;gap:34px}.product-details h1{font-size:44px}.product-trust-strip{grid-template-columns:repeat(2,1fr)}.product-trust-strip>div:nth-child(2){border-right:0}.product-trust-strip>div:nth-child(-n+2){border-bottom:1px solid #E0CEC5}.spec-grid{grid-template-columns:1fr}}
+@media(max-width:700px){.product-container{width:92%;padding-bottom:45px}.product-main{grid-template-columns:1fr;gap:30px}.thumbnail{width:64px;height:80px}.main-product-image{border-radius:12px}.main-product-image img{aspect-ratio:4/5}.product-details h1{font-size:39px}.purchase-actions{grid-template-columns:1fr}.pincode-heading{flex-direction:column;gap:3px}.information-tabs{gap:21px}.info-tab{font-size:10px}.spec-item{grid-template-columns:115px 1fr}.spec-item span,.spec-item strong{padding:9px 10px;font-size:9px}.product-trust-strip{margin-top:42px}.product-trust-strip>div{padding:15px 10px}.product-trust-strip strong{font-size:8px}.product-trust-strip small{font-size:7.5px}.product-footer{padding:26px 5%}}
+@media(max-width:420px){.product-details h1{font-size:34px}}
+
+</style>
+</head>
+
+<body>
+
+    <!-- =========================================================
+         PRODUCT PAGE
+    ========================================================= -->
+
+    <main class="product-page">
+
+        <div class="product-container">
+
+            <!-- =================================================
+                 BREADCRUMB
+            ================================================= -->
+
+            <div class="product-breadcrumb">
+
+                <a href="index.html">
+                    Home
+                </a>
+
+                <span>/</span>
+
+                <a href="shop.html">
+                    Shop All
+                </a>
+
+                <span>/</span>
+
+                <span>
+                    Royal Banarasi Silk Saree
+                </span>
+
+            </div>
+
+
+            <!-- =================================================
+                 PRODUCT MAIN
+            ================================================= -->
+
+            <section class="product-main">
+
+
+                <!-- =================================================
+                     IMAGE GALLERY
+                ================================================= -->
+
+                <div class="product-gallery">
+
+                    <div class="product-thumbnails">
+
+                        <button
+                            class="thumbnail active"
+                            data-image="assets/images/products/product-01.jpg"
+                        >
+                            <img
+                                src="assets/images/products/product-01.jpg"
+                                alt="Royal Banarasi Silk Saree thumbnail 1"
+                            >
+                        </button>
+
+                        <button
+                            class="thumbnail"
+                            data-image="assets/images/products/product-01.jpg"
+                        >
+                            <img
+                                src="assets/images/products/product-01.jpg"
+                                alt="Royal Banarasi Silk Saree thumbnail 2"
+                            >
+                        </button>
+
+                        <button
+                            class="thumbnail"
+                            data-image="assets/images/products/product-01.jpg"
+                        >
+                            <img
+                                src="assets/images/products/product-01.jpg"
+                                alt="Royal Banarasi Silk Saree thumbnail 3"
+                            >
+                        </button>
+
+                    </div>
+
+
+                    <div class="main-product-image">
+
+                        <span class="product-detail-badge">
+                            30% OFF
+                        </span>
+
+                        <button
+                            class="product-image-wishlist"
+                            type="button"
+                            aria-label="Add to wishlist"
+                        >
+                            ♡
+                        </button>
+
+                        <img
+                            id="mainProductImage"
+                            src="assets/images/products/product-01.jpg"
+                            alt="Royal Banarasi Silk Saree"
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================================
+                     PRODUCT INFORMATION
+                ================================================= -->
+
+                <div class="product-details">
+
+
+                    <span class="product-kicker">
+                        BANARASI COLLECTION
+                    </span>
+
+
+                    <h1>
+                        Royal Banarasi Silk Saree
+                    </h1>
+
+
+                    <p class="product-short-description">
+                        A timeless Banarasi silk saree featuring
+                        elegant zari work, rich colour and a graceful
+                        finish for weddings and grand celebrations.
+                    </p>
+
+
+                    <!-- RATING -->
+
+                    <div class="product-rating">
+
+                        <span class="stars">
+                            ★★★★★
+                        </span>
+
+                        <span>
+                            0 Reviews
+                        </span>
+
+                        <span class="verified-label">
+                            Verified Buyers
+                        </span>
+
+                    </div>
+
+
+                    <!-- PRICE -->
+
+                    <div class="product-price-block">
+
+                        <div class="product-prices">
+
+                            <strong class="product-sale-price">
+                                ₹3,499
+                            </strong>
+
+                            <del class="product-old-price">
+                                ₹4,999
+                            </del>
+
+                            <span class="product-discount">
+                                30% OFF
+                            </span>
+
+                        </div>
+
+                        <p class="save-amount">
+                            You save ₹1,500
+                        </p>
+
+                    </div>
+
+
+                    <!-- EXCHANGE BADGE -->
+
+                    <div class="exchange-guarantee">
+
+                        <span class="guarantee-icon">
+                            ✓
+                        </span>
+
+                        <div>
+                            <strong>
+                                7-Day Exchange Guaranteed
+                            </strong>
+
+                            <p>
+                                Easy exchange support on eligible products.
+                            </p>
+                        </div>
+
+                    </div>
+
+
+                    <!-- AVAILABILITY -->
+
+                    <div class="product-availability">
+
+                        <span class="availability-dot"></span>
+
+                        <strong>
+                            In Stock
+                        </strong>
+
+                        <span>
+                            • Ready to Ship
+                        </span>
+
+                    </div>
+
+
+                    <!-- QUANTITY -->
+
+                    <div class="quantity-section">
+
+                        <span>
+                            Quantity
+                        </span>
+
+                        <div class="quantity-control">
+
+                            <button
+                                type="button"
+                                id="decreaseQty"
+                                aria-label="Decrease quantity"
+                            >
+                                −
+                            </button>
+
+                            <span id="quantity">
+                                1
+                            </span>
+
+                            <button
+                                type="button"
+                                id="increaseQty"
+                                aria-label="Increase quantity"
+                            >
+                                +
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- PURCHASE BUTTONS -->
+
+                    <div class="purchase-actions">
+
+                        <button
+                            type="button"
+                            class="add-to-cart-main"
+                            id="addToCart"
+                        >
+                            Add to Cart
+                        </button>
+
+                        <button
+                            type="button"
+                            class="buy-now-main"
+                            id="buyNow"
+                        >
+                            Buy Now
+                        </button>
+
+                    </div>
+
+
+                    <!-- PINCODE -->
+
+                    <div class="pincode-box">
+
+                        <div class="pincode-heading">
+
+                            <span>
+                                Check Delivery
+                            </span>
+
+                            <small>
+                                Enter your PIN code
+                            </small>
+
+                        </div>
+
+
+                        <div class="pincode-input-row">
+
+                            <input
+                                type="text"
+                                id="pincodeInput"
+                                maxlength="6"
+                                inputmode="numeric"
+                                placeholder="Enter 6-digit PIN"
+                                aria-label="Enter pincode"
+                            >
+
+                            <button
+                                type="button"
+                                id="checkPincode"
+                            >
+                                Check
+                            </button>
+
+                        </div>
+
+
+                        <div
+                            class="pincode-result"
+                            id="pincodeResult"
+                        ></div>
+
+                    </div>
+
+
+                    <!-- STORE SUPPORT -->
+
+                    <div class="product-support">
+
+                        <a
+                            href="https://wa.me/YOUR_NUMBER"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            💬 Ask on WhatsApp
+                        </a>
+
+                        <span>
+                            Need help choosing?
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 PRODUCT DETAILS TABS
+            ================================================= -->
+
+            <section class="product-information">
+
+    <div class="information-tabs">
+
+        <button
+            class="info-tab active"
+            type="button"
+            data-tab="details"
+        >
+            Product Details
+        </button>
+
+        <button
+            class="info-tab"
+            type="button"
+            data-tab="shipping"
+        >
+            Shipping
+        </button>
+
+        <button
+            class="info-tab"
+            type="button"
+            data-tab="exchange"
+        >
+            Exchange
+        </button>
+
+        <button
+            class="info-tab"
+            type="button"
+            data-tab="care"
+        >
+            Care Instructions
+        </button>
+
+    </div>
+
+
+    <!-- =================================================
+         PRODUCT DETAILS
+    ================================================= -->
+
+    <div
+        class="info-panel active"
+        id="details"
+    >
+
+        <div class="spec-grid">
+
+            <div class="spec-item">
+                <span>Fabric</span>
+                <strong>Banarasi Silk</strong>
+            </div>
+
+            <div class="spec-item">
+                <span>Saree Length</span>
+                <strong>5.5 Metres</strong>
+            </div>
+
+            <div class="spec-item">
+                <span>Blouse Included</span>
+                <strong>Yes</strong>
+            </div>
+
+            <div class="spec-item">
+                <span>Blouse Length</span>
+                <strong>0.8 Metre</strong>
+            </div>
+
+            <div class="spec-item">
+                <span>Colour</span>
+                <strong>Royal Red</strong>
+            </div>
+
+            <div class="spec-item">
+                <span>Zari Type</span>
+                <strong>Gold Tone Zari</strong>
+            </div>
+
+            <div class="spec-item">
+                <span>Weave</span>
+                <strong>Banarasi Weave</strong>
+            </div>
+
+            <div class="spec-item">
+                <span>Craft</span>
+                <strong>Traditional Indian Weave</strong>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =================================================
+         SHIPPING
+    ================================================= -->
+
+    <div
+        class="info-panel"
+        id="shipping"
+    >
+
+        <h3>Delivery Information</h3>
+
+        <p>
+            Delivery time and shipping charges depend
+            on your PIN code and serviceability.
+        </p>
+
+        <p>
+            Enter your PIN code above to check estimated
+            delivery and available shipping service.
+        </p>
+
+    </div>
+
+
+    <!-- =================================================
+         EXCHANGE
+    ================================================= -->
+
+    <div
+        class="info-panel"
+        id="exchange"
+    >
+
+        <h3>7-Day Exchange Policy</h3>
+
+        <p>
+            Eligible products can be exchanged within
+            the configured exchange period.
+        </p>
+
+        <p>
+            For damaged, defective or incorrect products,
+            please follow the store's exchange procedure
+            and keep the unboxing video available.
+        </p>
+
+    </div>
+
+
+    <!-- =================================================
+         CARE
+    ================================================= -->
+
+    <div
+        class="info-panel"
+        id="care"
+    >
+
+        <h3>Care Instructions</h3>
+
+        <ul>
+
+            <li>
+                Dry clean recommended.
+            </li>
+
+            <li>
+                Store folded in a breathable cotton cloth.
+            </li>
+
+            <li>
+                Keep away from direct sunlight for long periods.
+            </li>
+
+            <li>
+                Avoid spraying perfume directly on the fabric.
+            </li>
+
+        </ul>
+
+    </div>
+
+</section>
+
+
+            <!-- =================================================
+                 PRODUCT TRUST STRIP
+            ================================================= -->
+
+            <section class="product-trust-strip">
+
+                <div>
+                    <span>✦</span>
+
+                    <strong>
+                        Secure Payments
+                    </strong>
+
+                    <small>
+                        UPI, Cards & Net Banking
+                    </small>
+                </div>
+
+
+                <div>
+                    <span>↗</span>
+
+                    <strong>
+                        Fast Delivery
+                    </strong>
+
+                    <small>
+                        Secure doorstep delivery
+                    </small>
+                </div>
+
+
+                <div>
+                    <span>✓</span>
+
+                    <strong>
+                        7-Day Exchange
+                    </strong>
+
+                    <small>
+                        Easy exchange support
+                    </small>
+                </div>
+
+
+                <div>
+                    <span>◌</span>
+
+                    <strong>
+                        WhatsApp Support
+                    </strong>
+
+                    <small>
+                        Quick assistance
+                    </small>
+                </div>
+
+            </section>
+
+        </div>
+
+    </main>
+
+
+    <footer class="product-footer">
+
+        <div class="product-footer-inner">
+
+            <h3>
+                Muskan Vastralok
+            </h3>
+
+            <p>
+                Timeless sarees, thoughtfully selected
+                for every celebration.
+            </p>
+
+            <a href="shop.html">
+                ← Continue Shopping
+            </a>
+
+        </div>
+
+    </footer>
+
+
+    <!-- Product JavaScript -->
+    <script src="JS/product.js"></script>
+
+</body>
+
+</html>
