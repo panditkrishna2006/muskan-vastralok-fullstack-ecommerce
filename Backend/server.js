@@ -3,8 +3,8 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 const crypto = require("crypto");
 const path = require("path");
+const multer = require("multer");
 const { createClient } = require("@supabase/supabase-js");
-
 
 /* =========================================================
    LOAD ENVIRONMENT VARIABLES
@@ -116,6 +116,62 @@ app.use(
 app.use(
     express.json()
 );
+
+/* =========================================================
+   PRODUCT IMAGE UPLOAD
+========================================================= */
+
+const upload = multer({
+
+    storage:
+        multer.memoryStorage(),
+
+    limits: {
+
+        fileSize:
+            5 * 1024 * 1024
+
+    },
+
+    fileFilter:
+        (req, file, callback) => {
+
+            const allowedTypes = [
+
+                "image/jpeg",
+
+                "image/png",
+
+                "image/webp"
+
+            ];
+
+
+            if (
+                allowedTypes.includes(
+                    file.mimetype
+                )
+            ) {
+
+                callback(
+                    null,
+                    true
+                );
+
+                return;
+
+            }
+
+
+            callback(
+                new Error(
+                    "Only JPG, PNG and WEBP images are allowed."
+                )
+            );
+
+        }
+
+});
 
 
 /* =========================================================
@@ -2168,6 +2224,412 @@ app.patch(
     }
 );
 
+
+/* =========================================================
+   UPLOAD PRODUCT IMAGE
+   POST /api/admin/products/upload-image
+========================================================= */
+
+app.post(
+    "/api/admin/products/upload-image",
+    requireAdmin,
+    upload.single("image"),
+    async (req, res) => {
+
+        try {
+
+            if (!req.file) {
+
+                return res.status(400).json({
+
+                    success: false,
+
+                    message:
+                        "Please select a product image."
+
+                });
+
+            }
+
+
+            const extension =
+                req.file.mimetype
+                    .split("/")
+                    [1];
+
+
+            const safeExtension =
+                extension === "jpeg"
+                    ? "jpg"
+                    : extension;
+
+
+            const fileName =
+
+                `products/${Date.now()}-${crypto
+                    .randomBytes(6)
+                    .toString("hex")}.${safeExtension}`;
+
+
+            const {
+                error
+            } = await supabase
+
+                .storage
+
+                .from(
+                    "product-images"
+                )
+
+                .upload(
+                    fileName,
+                    req.file.buffer,
+                    {
+
+                        contentType:
+                            req.file.mimetype,
+
+                        upsert:
+                            false
+
+                    }
+                );
+
+
+            if (error) {
+
+                console.error(
+                    "❌ Storage Upload Error:",
+                    error
+                );
+
+
+                return res.status(500).json({
+
+                    success: false,
+
+                    message:
+                        "Unable to upload image.",
+
+                    error:
+                        error.message
+
+                });
+
+            }
+
+
+            const {
+                data:
+                    publicUrlData
+            } = supabase
+
+                .storage
+
+                .from(
+                    "product-images"
+                )
+
+                .getPublicUrl(
+                    fileName
+                );
+
+
+            res.json({
+
+                success:
+                    true,
+
+                imageUrl:
+                    publicUrlData.publicUrl,
+
+                filePath:
+                    fileName
+
+            });
+
+        }
+
+        catch (error) {
+
+            console.error(
+                "❌ Image Upload Error:",
+                error
+            );
+
+
+            res.status(500).json({
+
+                success:
+                    false,
+
+                message:
+                    error.message ||
+                    "Unable to upload image."
+
+            });
+
+        }
+
+    }
+);
+
+/* =========================================================
+   ADD PRODUCT
+   POST /api/admin/products
+========================================================= */
+
+app.post(
+    "/api/admin/products",
+    requireAdmin,
+    async (req, res) => {
+
+        try {
+
+            const {
+
+                name,
+
+                description,
+
+                price,
+
+                category,
+
+                fabric,
+
+                occasion,
+
+                image,
+
+                stock,
+
+                availability,
+
+                cod_enabled,
+
+                is_trending,
+
+                is_new_arrival,
+
+                is_gift_collection
+
+            } = req.body;
+
+
+            /* =================================================
+               REQUIRED FIELDS
+            ================================================= */
+
+            if (
+
+                !name?.trim() ||
+
+                price === undefined ||
+
+                !category?.trim() ||
+
+                !fabric?.trim() ||
+
+                !occasion?.trim() ||
+
+                !image?.trim() ||
+
+                stock === undefined
+
+            ) {
+
+                return res.status(400).json({
+
+                    success: false,
+
+                    message:
+                        "Please fill all required product fields."
+
+                });
+
+            }
+
+
+            const numericPrice =
+                Number(price);
+
+
+            const numericStock =
+                Number(stock);
+
+
+            if (
+
+                !Number.isFinite(
+                    numericPrice
+                ) ||
+
+                numericPrice < 0
+
+            ) {
+
+                return res.status(400).json({
+
+                    success: false,
+
+                    message:
+                        "Invalid product price."
+
+                });
+
+            }
+
+
+            if (
+
+                !Number.isInteger(
+                    numericStock
+                ) ||
+
+                numericStock < 0
+
+            ) {
+
+                return res.status(400).json({
+
+                    success: false,
+
+                    message:
+                        "Invalid product stock."
+
+                });
+
+            }
+
+
+            /* =================================================
+               INSERT PRODUCT
+            ================================================= */
+
+            const {
+                data,
+                error
+            } = await supabase
+
+                .from("products")
+
+                .insert({
+
+                    name:
+                        name.trim(),
+
+                    description:
+                        description?.trim() ||
+                        null,
+
+                    price:
+                        numericPrice,
+
+                    category:
+                        category.trim(),
+
+                    fabric:
+                        fabric.trim(),
+
+                    occasion:
+                        occasion.trim(),
+
+                    image:
+                        image.trim(),
+
+                    stock:
+                        numericStock,
+
+                    availability:
+                        availability ||
+                        "in-stock",
+
+                    cod_enabled:
+                        cod_enabled !== false,
+
+                    is_trending:
+                        Boolean(
+                            is_trending
+                        ),
+
+                    is_new_arrival:
+                        Boolean(
+                            is_new_arrival
+                        ),
+
+                    is_gift_collection:
+                        Boolean(
+                            is_gift_collection
+                        )
+
+                })
+
+                .select()
+
+                .single();
+
+
+            if (error) {
+
+                console.error(
+                    "❌ Product Insert Error:",
+                    error
+                );
+
+
+                return res.status(500).json({
+
+                    success: false,
+
+                    message:
+                        "Unable to create product.",
+
+                    error:
+                        error.message
+
+                });
+
+            }
+
+
+            res.status(201).json({
+
+                success:
+                    true,
+
+                message:
+                    "Product created successfully.",
+
+                product:
+                    data
+
+            });
+
+        }
+
+        catch (error) {
+
+            console.error(
+                "❌ Add Product Error:",
+                error
+            );
+
+
+            res.status(500).json({
+
+                success:
+                    false,
+
+                message:
+                    "Unable to create product."
+
+            });
+
+        }
+
+    }
+);
 
 /* =========================================================
    UPDATE PRODUCT

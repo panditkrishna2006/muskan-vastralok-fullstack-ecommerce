@@ -78,6 +78,35 @@ document.addEventListener(
                 "productsTable"
             );
 
+        const addProductButton =
+    document.getElementById(
+        "addProductButton"
+    );
+
+const productModal =
+    document.getElementById(
+        "productModal"
+    );
+
+const closeProductModal =
+    document.getElementById(
+        "closeProductModal"
+    );
+
+const cancelProductButton =
+    document.getElementById(
+        "cancelProductButton"
+    );
+
+const addProductForm =
+    document.getElementById(
+        "addProductForm"
+    );
+
+const saveProductButton =
+    document.getElementById(
+        "saveProductButton"
+    );
 
         /* =====================================================
            TOAST
@@ -1535,6 +1564,377 @@ document.addEventListener(
             );
 
         }
+
+        /* =========================================================
+   OPEN PRODUCT MODAL
+========================================================= */
+
+function openProductModal() {
+
+    if (!productModal) {
+
+        return;
+
+    }
+
+
+    productModal.style.display =
+        "flex";
+
+}
+
+
+/* =========================================================
+   CLOSE PRODUCT MODAL
+========================================================= */
+
+function closeProductModalHandler() {
+
+    if (!productModal) {
+
+        return;
+
+    }
+
+
+    productModal.style.display =
+        "none";
+
+
+    if (addProductForm) {
+
+        addProductForm.reset();
+
+    }
+
+}
+
+
+/* =========================================================
+   ADD PRODUCT
+========================================================= */
+
+async function addProduct(
+    event
+) {
+
+    event.preventDefault();
+
+
+    const imageInput =
+        document.getElementById(
+            "productImage"
+        );
+
+
+    if (
+        !imageInput ||
+        !imageInput.files.length
+    ) {
+
+        showToast(
+            "Please select a product image."
+        );
+
+        return;
+
+    }
+
+
+    const file =
+        imageInput.files[0];
+
+
+    if (
+        file.size >
+        5 * 1024 * 1024
+    ) {
+
+        showToast(
+            "Image must be smaller than 5 MB."
+        );
+
+        return;
+
+    }
+
+
+    saveProductButton.disabled =
+        true;
+
+    saveProductButton.textContent =
+        "UPLOADING IMAGE...";
+
+
+    try {
+
+        /* =================================================
+           1. UPLOAD IMAGE
+        ================================================= */
+
+        const formData =
+            new FormData();
+
+
+        formData.append(
+            "image",
+            file
+        );
+
+
+        const token =
+            sessionStorage.getItem(
+                "adminToken"
+            );
+
+
+        const uploadResponse =
+            await fetch(
+
+                `${API}/api/admin/products/upload-image`,
+
+                {
+
+                    method:
+                        "POST",
+
+                    headers: {
+
+                        Authorization:
+                            `Bearer ${token}`
+
+                    },
+
+                    credentials:
+                        "include",
+
+                    body:
+                        formData
+
+                }
+
+            );
+
+
+        const uploadResult =
+            await uploadResponse.json();
+
+
+        if (
+            !uploadResponse.ok ||
+            !uploadResult.success
+        ) {
+
+            throw new Error(
+                uploadResult.message ||
+                "Image upload failed."
+            );
+
+        }
+
+
+        /* =================================================
+           2. CREATE PRODUCT
+        ================================================= */
+
+        saveProductButton.textContent =
+            "ADDING PRODUCT...";
+
+
+        const productData = {
+
+            name:
+                document
+                    .getElementById(
+                        "productName"
+                    )
+                    .value
+                    .trim(),
+
+            description:
+                document
+                    .getElementById(
+                        "productDescription"
+                    )
+                    .value
+                    .trim(),
+
+            price:
+                Number(
+                    document
+                        .getElementById(
+                            "productPrice"
+                        )
+                        .value
+                ),
+
+            category:
+                document
+                    .getElementById(
+                        "productCategory"
+                    )
+                    .value,
+
+            fabric:
+                document
+                    .getElementById(
+                        "productFabric"
+                    )
+                    .value,
+
+            occasion:
+                document
+                    .getElementById(
+                        "productOccasion"
+                    )
+                    .value,
+
+            image:
+                uploadResult.imageUrl,
+
+            stock:
+                Number(
+                    document
+                        .getElementById(
+                            "productStock"
+                        )
+                        .value
+                ),
+
+            availability:
+                document
+                    .getElementById(
+                        "productAvailability"
+                    )
+                    .value,
+
+            cod_enabled:
+                document
+                    .getElementById(
+                        "productCod"
+                    )
+                    .checked,
+
+            is_trending:
+                document
+                    .getElementById(
+                        "productTrending"
+                    )
+                    .checked,
+
+            is_new_arrival:
+                document
+                    .getElementById(
+                        "productNewArrival"
+                    )
+                    .checked,
+
+            is_gift_collection:
+                document
+                    .getElementById(
+                        "productGift"
+                    )
+                    .checked
+
+        };
+
+
+        await api(
+
+            "/api/admin/products",
+
+            {
+
+                method:
+                    "POST",
+
+                body:
+                    JSON.stringify(
+                        productData
+                    )
+
+            }
+
+        );
+
+
+        showToast(
+            "Product added successfully."
+        );
+
+
+        closeProductModalHandler();
+
+
+        await loadDashboard();
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "❌ Add Product Error:",
+            error
+        );
+
+
+        showToast(
+            error.message
+        );
+
+    }
+
+    finally {
+
+        saveProductButton.disabled =
+            false;
+
+        saveProductButton.textContent =
+            "ADD PRODUCT";
+
+    }
+
+}
+
+
+if (addProductButton) {
+
+    addProductButton.addEventListener(
+        "click",
+        openProductModal
+    );
+
+}
+
+
+if (closeProductModal) {
+
+    closeProductModal.addEventListener(
+        "click",
+        closeProductModalHandler
+    );
+
+}
+
+
+if (cancelProductButton) {
+
+    cancelProductButton.addEventListener(
+        "click",
+        closeProductModalHandler
+    );
+
+}
+
+
+if (addProductForm) {
+
+    addProductForm.addEventListener(
+        "submit",
+        addProduct
+    );
+
+}
 
 
         /* =====================================================
