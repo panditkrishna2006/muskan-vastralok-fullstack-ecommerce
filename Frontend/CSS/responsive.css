@@ -1,0 +1,1182 @@
+/* =========================================================
+   RESPONSIVE CSS
+   Works with current style.css
+========================================================= */
+
+
+/* =========================================================
+   PREMIUM TRUST / SERVICE SECTION
+========================================================= */
+
+@media (max-width: 1100px) {
+
+    .trust-section {
+        padding: 30px 4% 34px;
+    }
+
+    .trust-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+    }
+
+    .trust-card {
+        min-height: 110px;
+    }
+}
+
+
+@media (max-width: 650px) {
+
+    .trust-section {
+        padding: 26px 16px 28px;
+    }
+
+    .trust-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .trust-heading {
+        margin-bottom: 16px;
+    }
+
+    .trust-kicker {
+        font-size: 9px;
+        letter-spacing: 2px;
+    }
+
+    .trust-line {
+        width: 28px;
+    }
+
+    .trust-card {
+        min-height: 92px;
+        padding: 15px 16px;
+        gap: 14px;
+    }
+
+    .trust-icon-box {
+        width: 48px;
+        height: 48px;
+        flex: 0 0 48px;
+    }
+
+    .trust-icon-box svg {
+        width: 23px;
+        height: 23px;
+    }
+
+    .trust-card-content h3 {
+        font-size: 17px;
+    }
+
+    .trust-card-content p {
+        font-size: 10px;
+    }
+
+    .trust-number {
+        font-size: 8px;
+        top: 8px;
+        right: 10px;
+    }
+
+    .trust-arrow {
+        display: none;
+    }
+}
+
+
+/* =========================================================
+   SHOP BY OCCASION
+========================================================= */
+
+@media (max-width: 1100px) {
+
+    .occasion-section {
+        padding: 65px 4%;
+    }
+
+    .occasion-grid {
+        grid-template-columns: repeat(6, 210px);
+
+        overflow-x: auto;
+        justify-content: start;
+
+        padding-bottom: 10px;
+
+        scrollbar-width: thin;
+        scroll-snap-type: x mandatory;
+    }
+
+    .occasion-card {
+        height: 300px;
+        scroll-snap-align: start;
+    }
+}
+
+
+@media (max-width: 700px) {
+
+    .occasion-section {
+        padding: 52px 18px;
+    }
+
+    .section-heading {
+        margin-bottom: 26px;
+    }
+
+    .section-heading h2 {
+        font-size: 35px;
+    }
+
+    .section-heading p {
+        font-size: 12px;
+    }
+
+    .occasion-grid {
+        grid-template-columns: repeat(6, 185px);
+        gap: 12px;
+    }
+
+    .occasion-card {
+        height: 270px;
+    }
+}
+
+
+@media (max-width: 500px) {
+
+    .occasion-section {
+        padding: 45px 15px;
+    }
+
+    .section-heading h2 {
+        font-size: 31px;
+    }
+
+    .occasion-grid {
+        grid-template-columns: repeat(6, 165px);
+        gap: 10px;
+    }
+
+    .occasion-card {
+        height: 235px;
+    }
+
+    .occasion-overlay {
+        padding: 20px 16px;
+    }
+
+    .occasion-overlay h3 {
+        font-size: 25px;
+    }
+
+    .occasion-overlay span {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* =========================================================
+   TRENDING SAREES
+========================================================= */
+
+@media (max-width: 1150px) {
+
+    .trending-section {
+        padding: 65px 4%;
+    }
+
+    .product-row {
+        grid-template-columns: repeat(5, 215px);
+
+        overflow-x: auto;
+        justify-content: start;
+
+        padding-bottom: 10px;
+
+        scrollbar-width: thin;
+        scroll-snap-type: x mandatory;
+    }
+
+    .product-card {
+        scroll-snap-align: start;
+    }
+}
+
+
+@media (max-width: 700px) {
+
+    .trending-section {
+        padding: 52px 18px;
+    }
+
+    .trending-header {
+        align-items: flex-start;
+    }
+
+    .trending-title-box h2 {
+        font-size: 38px;
+    }
+
+    .trending-title-box p {
+        font-size: 12px;
+    }
+
+    .product-row {
+        grid-template-columns: repeat(5, 200px);
+        gap: 12px;
+    }
+}
+
+
+@media (max-width: 500px) {
+
+    .trending-section {
+        padding: 45px 15px;
+    }
+
+    .trending-header {
+        display: block;
+    }
+
+    .trending-title-box h2 {
+        font-size: 33px;
+    }
+
+    .view-all-link {
+        display: inline-block;
+        margin-top: 10px;
+    }
+
+    .product-row {
+        grid-template-columns: repeat(5, 175px);
+        gap: 10px;
+    }
+
+    .product-info {
+        padding: 13px 11px 14px;
+    }
+
+    .product-info h3 {
+        font-size: 12px;
+    }
+
+    .sale-price {
+        font-size: 14px;
+    }
+
+    .old-price {
+        font-size: 10px;
+    }
+
+    .add-cart-btn {
+        height: 37px;
+        font-size: 11px;
+    }
+
+    .discount-badge {
+        top: 9px;
+        left: 9px;
+        font-size: 9px;
+    }
+
+    .wishlist-btn {
+        width: 32px;
+        height: 32px;
+        font-size: 18px;
+    }
+}
+
+
+/* =========================================================
+   NEW ARRIVALS
+========================================================= */
+
+@media (max-width: 1100px) {
+
+    .new-arrivals-section {
+        padding: 60px 4% 55px;
+    }
+
+    .new-arrivals-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 15px;
+    }
+}
+
+
+@media (max-width: 700px) {
+
+    .new-arrivals-section {
+        padding: 52px 18px;
+    }
+
+    .new-arrivals-header {
+        align-items: flex-start;
+    }
+
+    .new-arrivals-title h2 {
+        font-size: 38px;
+    }
+
+    .new-arrivals-title p {
+        font-size: 12px;
+    }
+
+    .new-arrivals-grid {
+        display: flex;
+        overflow-x: auto;
+
+        gap: 13px;
+        padding-bottom: 10px;
+
+        scrollbar-width: thin;
+        scroll-snap-type: x mandatory;
+    }
+
+    .new-product-card {
+        flex: 0 0 235px;
+        scroll-snap-align: start;
+    }
+}
+
+
+@media (max-width: 500px) {
+
+    .new-arrivals-section {
+        padding: 45px 15px 50px;
+    }
+
+    .new-arrivals-header {
+        display: block;
+    }
+
+    .new-arrivals-title h2 {
+        font-size: 33px;
+    }
+
+    .new-arrivals-title p {
+        font-size: 12px;
+    }
+
+    .new-product-card {
+        flex: 0 0 205px;
+    }
+
+    .view-all-link {
+        display: inline-block;
+        margin-top: 10px;
+    }
+
+    .new-product-info {
+        padding: 13px 11px 13px;
+    }
+
+    .new-product-info h3 {
+        font-size: 12px;
+    }
+
+    .new-price {
+        font-size: 15px;
+    }
+
+    .new-cart-btn {
+        min-height: 37px;
+        font-size: 11px;
+    }
+
+    .new-badge {
+        top: 9px;
+        left: 9px;
+    }
+
+    .new-wishlist-btn {
+        width: 32px;
+        height: 32px;
+        font-size: 18px;
+    }
+}
+
+
+/* =========================================================
+   SAREES BY BUDGET
+========================================================= */
+
+@media (max-width: 1000px) {
+
+    .budget-section {
+        padding: 60px 4%;
+    }
+
+    .budget-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 15px;
+    }
+
+    .budget-card {
+        min-height: 220px;
+    }
+}
+
+
+@media (max-width: 600px) {
+
+    .budget-section {
+        padding: 50px 16px;
+    }
+
+    .budget-heading {
+        margin-bottom: 28px;
+    }
+
+    .budget-heading h2 {
+        font-size: 36px;
+    }
+
+    .budget-heading p {
+        font-size: 12px;
+    }
+
+    .budget-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .budget-card {
+        min-height: 180px;
+        padding: 23px;
+    }
+
+    .budget-content h3 {
+        font-size: 28px;
+    }
+}
+
+
+/* =========================================================
+   GIFT COLLECTION
+========================================================= */
+
+@media (max-width: 850px) {
+
+    .gift-section {
+        grid-template-columns: 1fr;
+        gap: 34px;
+
+        padding: 55px 7%;
+    }
+
+    .gift-content {
+        max-width: 100%;
+        text-align: center;
+    }
+
+    .gift-content p {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .gift-visual {
+        min-height: auto;
+    }
+
+    .gift-image {
+        width: 100%;
+        max-width: 540px;
+        height: 330px;
+        margin: 0 auto;
+    }
+}
+
+
+@media (max-width: 500px) {
+
+    .gift-section {
+        padding: 48px 18px;
+    }
+
+    .gift-content h2 {
+        font-size: 42px;
+    }
+
+    .gift-content p {
+        font-size: 12px;
+    }
+
+    .gift-image {
+        height: 255px;
+        border-radius: 9px;
+    }
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+@media (max-width: 1100px) {
+
+    .hero-section {
+        height: 500px;
+    }
+
+    .hero-content {
+        left: 7%;
+        width: 48%;
+        max-width: 560px;
+    }
+
+    .hero-content h1 {
+        font-size: clamp(34px, 4.1vw, 50px);
+    }
+
+    .hero-content p {
+        font-size: 14px;
+    }
+}
+
+
+@media (max-width: 850px) {
+
+    .hero-section {
+        width: 100%;
+        height: 400px;
+    }
+
+    .hero-content {
+        left: 7%;
+        width: 52%;
+    }
+
+    .hero-content h1 {
+        font-size: 40px;
+    }
+
+    .hero-content p {
+        font-size: 12px;
+        line-height: 1.5;
+    }
+
+    .hero-price {
+        gap: 9px;
+        margin-bottom: 18px;
+    }
+
+    .hero-price .sale-price {
+        font-size: 23px;
+    }
+
+    .hero-price .old-price {
+        font-size: 13px;
+    }
+
+    .hero-price .discount {
+        padding: 6px 9px;
+        font-size: 9px;
+    }
+
+    .hero-button {
+        min-width: 135px;
+        padding: 11px 18px;
+        font-size: 12px;
+    }
+
+    .hero-arrow {
+        width: 38px;
+        height: 38px;
+        font-size: 23px;
+    }
+
+    .hero-prev {
+        left: 12px;
+    }
+
+    .hero-next {
+        right: 12px;
+    }
+}
+
+
+@media (max-width: 600px) {
+
+    .hero-section {
+        height: 320px;
+    }
+
+    .hero-content {
+        left: 6%;
+        width: 58%;
+    }
+
+    .hero-content .hero-badge {
+        margin-bottom: 9px;
+        padding: 5px 11px;
+        font-size: 8px;
+        letter-spacing: 1px;
+    }
+
+    .hero-content h1 {
+        font-size: 29px;
+        line-height: 1.02;
+        margin-bottom: 9px;
+    }
+
+    .hero-content p {
+        font-size: 9px;
+        line-height: 1.35;
+        margin-bottom: 12px;
+    }
+
+    .hero-price {
+        gap: 6px;
+        margin-bottom: 12px;
+    }
+
+    .hero-price .sale-price {
+        font-size: 17px;
+    }
+
+    .hero-price .old-price {
+        font-size: 10px;
+    }
+
+    .hero-price .discount {
+        padding: 4px 6px;
+        font-size: 8px;
+    }
+
+    .hero-button {
+        min-width: 105px;
+        padding: 8px 12px;
+        font-size: 10px;
+        gap: 6px;
+    }
+
+    .hero-arrow {
+        width: 30px;
+        height: 30px;
+        font-size: 18px;
+    }
+
+    .hero-prev {
+        left: 8px;
+    }
+
+    .hero-next {
+        right: 8px;
+    }
+
+    .hero-dots {
+        bottom: 8px;
+        gap: 5px;
+    }
+
+    .hero-dot {
+        width: 6px;
+        height: 6px;
+    }
+
+    .hero-dot.active {
+        width: 19px;
+    }
+}
+
+
+@media (max-width: 420px) {
+
+    .hero-section {
+        height: 285px;
+    }
+
+    .hero-content {
+        left: 5%;
+        width: 60%;
+    }
+
+    .hero-content h1 {
+        font-size: 25px;
+    }
+
+    .hero-content p {
+        font-size: 8px;
+    }
+
+    .hero-price .sale-price {
+        font-size: 15px;
+    }
+
+    .hero-button {
+        min-width: 96px;
+        padding: 7px 10px;
+    }
+}
+
+
+/* =========================================================
+   NAVBAR
+========================================================= */
+
+@media (max-width: 1100px) {
+
+    .navbar {
+        padding: 11px 20px;
+        gap: 17px;
+    }
+
+    .nav-links {
+        gap: 10px;
+    }
+
+    .nav-links a {
+        font-size: 12px;
+    }
+
+    .logo a {
+        font-size: 25px;
+    }
+
+    .nav-search {
+        width: 210px;
+    }
+}
+
+
+@media (max-width: 850px) {
+
+    .top-bar {
+        padding: 0 15px;
+    }
+
+    .top-bar-left {
+        display: none;
+    }
+
+    .navbar {
+        min-height: 70px;
+        padding: 10px 15px;
+        justify-content: space-between;
+    }
+
+    .nav-links {
+        display: none;
+    }
+
+    .logo a {
+        font-size: 24px;
+    }
+
+    .nav-actions {
+        gap: 6px;
+    }
+
+    .nav-search {
+        width: 180px;
+    }
+}
+
+
+@media (max-width: 550px) {
+
+    .top-bar {
+        height: 35px;
+    }
+
+    .language-btn {
+        font-size: 10px;
+        padding: 5px 7px;
+    }
+
+    .logo a {
+        font-size: 20px;
+    }
+
+    .nav-actions {
+        gap: 5px;
+    }
+
+    .nav-search {
+        width: 38px;
+        height: 35px;
+        padding: 0;
+        border-radius: 50%;
+        justify-content: center;
+    }
+
+    .nav-search input,
+    .search-icon {
+        display: none;
+    }
+
+    .search-submit {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        background: transparent;
+        color: #3B0C17;
+    }
+
+    .search-submit:hover {
+        background: #3B0C17;
+        color: #E9C8C8;
+    }
+
+    .nav-icon {
+        width: 35px;
+        height: 35px;
+        font-size: 14px;
+    }
+
+    .login-button {
+        padding: 8px 11px;
+        font-size: 11px;
+    }
+}
+
+
+/* =========================================================
+   CUSTOMER STORIES RESPONSIVE
+========================================================= */
+
+@media (max-width: 700px) {
+
+    .customer-stories-section {
+
+        padding: 55px 18px 50px;
+
+    }
+
+    .customer-stories-heading {
+
+        margin-bottom: 27px;
+
+    }
+
+    .customer-stories-heading h2 {
+
+        font-size: 38px;
+
+    }
+
+    .customer-stories-heading p {
+
+        font-size: 12px;
+
+    }
+
+    .review-empty-card {
+
+        padding: 40px 22px;
+
+        border-radius: 13px;
+
+    }
+
+    .review-empty-card h3 {
+
+        font-size: 26px;
+
+    }
+
+    .review-empty-card p {
+
+        font-size: 11px;
+
+        line-height: 1.7;
+
+    }
+
+}
+
+
+@media (max-width: 450px) {
+
+    .customer-stories-section {
+
+        padding: 48px 15px;
+
+    }
+
+    .customer-stories-heading h2 {
+
+        font-size: 33px;
+
+    }
+
+    .review-empty-card {
+
+        padding: 35px 18px;
+
+    }
+
+    .review-icon {
+
+        width: 60px;
+        height: 60px;
+
+    }
+
+    .review-icon svg {
+
+        width: 27px;
+        height: 27px;
+
+    }
+
+    .review-empty-card h3 {
+
+        font-size: 23px;
+
+    }
+}
+
+/* =========================================================
+   VISIT OUR STORE RESPONSIVE
+========================================================= */
+
+@media (max-width: 950px) {
+
+    .store-section {
+        padding: 70px 5%;
+    }
+
+    .store-inner {
+        grid-template-columns: 1fr;
+        gap: 45px;
+    }
+
+    .store-content {
+        max-width: 700px;
+        text-align: center;
+        margin: 0 auto;
+    }
+
+    .store-title-line {
+        justify-content: center;
+    }
+
+    .store-content > p {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .store-details {
+        align-items: center;
+    }
+
+    /* Image stays above the buttons */
+    .store-image-wrapper {
+        width: 100%;
+
+        min-height: auto;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        gap: 16px;
+
+        padding-top: 0;
+    }
+
+    .store-image-frame {
+        width: 100%;
+        max-width: 500px;
+        height: 360px;
+    }
+
+    /* Buttons move below image */
+    .store-actions {
+        width: 100%;
+
+        display: flex;
+        flex-direction: row;
+
+        align-items: center;
+        justify-content: center;
+
+        gap: 12px;
+
+        position: relative;
+        z-index: 5;
+    }
+
+    .store-primary-btn,
+    .store-secondary-btn {
+        width: auto;
+        min-width: 150px;
+    }
+
+    .store-circle-one,
+    .store-circle-two {
+        pointer-events: none;
+    }
+}
+
+
+@media (max-width: 550px) {
+
+    .store-section {
+        padding: 55px 17px;
+    }
+
+    .store-inner {
+        gap: 35px;
+    }
+
+    .store-eyebrow {
+        font-size: 9px;
+    }
+
+    .store-title-line {
+        font-size: 9px;
+    }
+
+    .store-content h2 {
+        font-size: 42px;
+    }
+
+    .store-content > p {
+        font-size: 12px;
+        line-height: 1.7;
+    }
+
+    .store-detail {
+        justify-content: flex-start;
+        text-align: left;
+    }
+
+    .store-image-wrapper {
+        width: 100%;
+        gap: 14px;
+    }
+
+    .store-image-frame {
+        width: 100%;
+        max-width: 100%;
+        height: 280px;
+    }
+
+    /* Full-width stacked buttons on small screens */
+    .store-actions {
+        width: 100%;
+
+        display: flex;
+        flex-direction: column;
+
+        gap: 10px;
+    }
+
+    .store-primary-btn,
+    .store-secondary-btn {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .store-circle-one {
+        width: 300px;
+        height: 300px;
+        right: -30px;
+    }
+
+    .store-circle-two {
+        width: 350px;
+        height: 350px;
+        right: -55px;
+    }
+}
+
+
+@media (max-width: 400px) {
+
+    .store-image-frame {
+        height: 250px;
+    }
+
+    .store-content h2 {
+        font-size: 36px;
+    }
+}
+
+/* =========================================================
+   PREMIUM FOOTER RESPONSIVE
+========================================================= */
+
+@media (max-width: 1000px) {
+
+    .footer-main {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        gap: 45px 35px;
+
+        padding: 60px 5% 45px;
+    }
+
+    .footer-brand {
+        max-width: 100%;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .footer-main {
+        grid-template-columns: 1fr;
+
+        gap: 32px;
+
+        padding: 50px 20px 35px;
+    }
+
+    .footer-logo {
+        font-size: 30px;
+    }
+
+    .footer-brand > p {
+        font-size: 11px;
+    }
+
+    .footer-column h3 {
+        margin-bottom: 13px;
+
+        font-size: 19px;
+    }
+
+    .footer-column a {
+        font-size: 10px;
+
+        margin-bottom: 8px;
+    }
+
+    .footer-store > p {
+        font-size: 10px;
+    }
+
+    .footer-divider {
+        width: 88%;
+    }
+
+    .footer-bottom {
+        padding: 20px;
+
+        flex-direction: column;
+
+        align-items: center;
+
+        text-align: center;
+
+        gap: 13px;
+    }
+
+    .footer-policies {
+        flex-wrap: wrap;
+
+        justify-content: center;
+
+        gap: 10px 16px;
+    }
+
+}

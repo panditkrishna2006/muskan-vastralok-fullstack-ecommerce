@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Checkout | Muskan Vastralok</title>
+
+
+    <!-- Fonts -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Lora:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <link
+        rel="stylesheet"
+        href="CSS/style.css"
+    >
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        body {
+            margin: 0;
+            background: #FBF3E7;
+            color: #3A292E;
+            font-family: "Lora", serif;
+        }
+
+
+        .checkout-page {
+            min-height: 100vh;
+        }
+
+
+        .checkout-container {
+            width: 90%;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 48px 0 80px;
+        }
+
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        .checkout-heading {
+            margin-bottom: 38px;
+        }
+
+
+        .checkout-heading span {
+            display: block;
+            margin-bottom: 8px;
+            color: #9B7A4A;
+            font: 700 10px "Lora", serif;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+
+        .checkout-heading h1 {
+            margin: 0;
+            color: #3B0C17;
+            font: 600 52px/1 "Cormorant Garamond", serif;
+        }
+
+
+        .checkout-heading p {
+            margin: 10px 0 0;
+            color: #7A666C;
+            font: 12px "Lora", serif;
+        }
+
+
+        /* =========================
+           LAYOUT
+        ========================= */
+
+        .checkout-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 1.25fr) minmax(320px, .75fr);
+            gap: 30px;
+            align-items: start;
+        }
+
+
+        /* =========================
+           FORM CARD
+        ========================= */
+
+        .checkout-form-card,
+        .checkout-summary {
+            border: 1px solid #E0CEC5;
+            border-radius: 12px;
+            background: #F6EBDD;
+        }
+
+
+        .checkout-form-card {
+            padding: 28px;
+        }
+
+
+        .section-title {
+            margin: 0 0 20px;
+            color: #3B0C17;
+            font: 600 30px "Cormorant Garamond", serif;
+        }
+
+
+        .form-section {
+            padding-bottom: 28px;
+            margin-bottom: 28px;
+            border-bottom: 1px solid #E1CEC5;
+        }
+
+
+        .form-section:last-child {
+            padding-bottom: 0;
+            margin-bottom: 0;
+            border-bottom: 0;
+        }
+
+
+        /* =========================
+           FORM
+        ========================= */
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+
+
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
+
+
+        .form-group label {
+            color: #3B0C17;
+            font: 700 10px "Lora", serif;
+        }
+
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            border: 1px solid #D8C5BD;
+            border-radius: 7px;
+            outline: none;
+            background: #FBF3E7;
+            color: #3B0C17;
+            font: 11px "Lora", serif;
+        }
+
+
+        .form-group input,
+        .form-group select {
+            height: 44px;
+            padding: 0 12px;
+        }
+
+
+        .form-group textarea {
+            min-height: 90px;
+            resize: vertical;
+            padding: 12px;
+        }
+
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: #3B0C17;
+        }
+
+
+        .field-error {
+            display: none;
+            color: #8A3D3D;
+            font: 9px "Lora", serif;
+        }
+
+
+        /* =========================
+           PAYMENT
+        ========================= */
+
+        .payment-options {
+            display: grid;
+            gap: 10px;
+        }
+
+
+        .payment-option {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 15px;
+
+            border: 1px solid #DCC9C1;
+            border-radius: 8px;
+
+            background: #FBF3E7;
+
+            cursor: pointer;
+            transition: .2s;
+        }
+
+
+        .payment-option:hover {
+            border-color: #C6A15B;
+        }
+
+
+        .payment-option input {
+            accent-color: #3B0C17;
+        }
+
+
+        .payment-content strong {
+            display: block;
+            color: #3B0C17;
+            font: 700 11px "Lora", serif;
+        }
+
+
+        .payment-content small {
+            display: block;
+            margin-top: 3px;
+            color: #806D72;
+            font: 9px "Lora", serif;
+        }
+
+
+        /* =========================
+           SUMMARY
+        ========================= */
+
+        .checkout-summary {
+            position: sticky;
+            top: 20px;
+            padding: 25px;
+        }
+
+
+        .checkout-summary h2 {
+            margin: 0 0 20px;
+            color: #3B0C17;
+            font: 600 31px "Cormorant Garamond", serif;
+        }
+
+
+        .summary-items {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            padding-bottom: 18px;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #E0CEC5;
+        }
+
+
+        .summary-item {
+            display: grid;
+            grid-template-columns: 58px 1fr auto;
+            gap: 10px;
+            align-items: center;
+        }
+
+
+        .summary-item-image {
+            width: 58px;
+            height: 73px;
+            overflow: hidden;
+            border-radius: 6px;
+            background: #E9C8C8;
+        }
+
+
+        .summary-item-image img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+        }
+
+
+        .summary-item-name {
+            color: #3B0C17;
+            font: 700 10px/1.4 "Lora", serif;
+        }
+
+
+        .summary-item-meta {
+            margin-top: 4px;
+            color: #806D72;
+            font: 9px "Lora", serif;
+        }
+
+
+        .summary-item-total {
+            color: #3B0C17;
+            font: 700 10px "Lora", serif;
+            text-align: right;
+        }
+
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            padding: 10px 0;
+
+            color: #6E5B61;
+            font: 10px "Lora", serif;
+        }
+
+
+        .summary-row strong {
+            color: #3B0C17;
+        }
+
+
+        .summary-total {
+            display: flex;
+            justify-content: space-between;
+            padding-top: 16px;
+            margin-top: 7px;
+            border-top: 1px solid #DCC9C1;
+
+            color: #3B0C17;
+            font: 700 15px "Lora", serif;
+        }
+
+
+        .place-order-btn {
+            width: 100%;
+            min-height: 52px;
+            margin-top: 20px;
+
+            border: 1px solid #3B0C17;
+            border-radius: 7px;
+
+            background: #3B0C17;
+            color: #F6EBDD;
+
+            font: 700 11px "Lora", serif;
+            cursor: pointer;
+        }
+
+
+        .place-order-btn:hover {
+            background: #C6A15B;
+            border-color: #C6A15B;
+            color: #3B0C17;
+        }
+
+
+        .back-cart {
+            display: block;
+            margin-top: 13px;
+            text-align: center;
+
+            color: #3B0C17;
+            font: 10px "Lora", serif;
+            text-decoration: none;
+        }
+
+
+        .back-cart:hover {
+            color: #C6A15B;
+        }
+
+
+        /* =========================
+           COD MESSAGE
+        ========================= */
+
+        .cod-message {
+            display: none;
+            margin-top: 13px;
+            padding: 11px 12px;
+            border-radius: 7px;
+            background: rgba(233, 200, 200, .45);
+            color: #6E5B61;
+            font: 9px/1.6 "Lora", serif;
+        }
+
+
+        .cod-message.show {
+            display: block;
+        }
+
+
+        /* =========================
+           EMPTY CHECKOUT
+        ========================= */
+
+        .checkout-empty {
+            display: none;
+            padding: 80px 20px;
+            text-align: center;
+
+            border: 1px solid #E0CEC5;
+            border-radius: 12px;
+            background: #F6EBDD;
+        }
+
+
+        .checkout-empty.show {
+            display: block;
+        }
+
+
+        .checkout-empty h2 {
+            margin: 0;
+            color: #3B0C17;
+            font: 600 38px "Cormorant Garamond", serif;
+        }
+
+
+        .checkout-empty p {
+            margin: 9px 0 20px;
+            color: #7A666C;
+            font: 11px "Lora", serif;
+        }
+
+
+        .checkout-empty a {
+            display: inline-block;
+            padding: 11px 19px;
+
+            border: 1px solid #3B0C17;
+            border-radius: 6px;
+
+            background: #3B0C17;
+            color: #F6EBDD;
+
+            font: 700 10px "Lora", serif;
+            text-decoration: none;
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        .checkout-footer {
+            padding: 34px 5%;
+            background: #3B0C17;
+            color: #F6EBDD;
+            text-align: center;
+        }
+
+
+        .checkout-footer h3 {
+            margin: 0 0 6px;
+            color: #F6EBDD;
+            font: 600 29px "Cormorant Garamond", serif;
+        }
+
+
+        .checkout-footer p {
+            margin: 0;
+            color: #E9C8C8;
+            font: 10px "Lora", serif;
+        }
+
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 900px) {
+
+            .checkout-layout {
+                grid-template-columns: 1fr;
+            }
+
+
+            .checkout-summary {
+                position: static;
+            }
+
+        }
+
+
+        @media (max-width: 600px) {
+
+            .checkout-container {
+                width: 92%;
+                padding: 35px 0 55px;
+            }
+
+
+            .checkout-heading h1 {
+                font-size: 42px;
+            }
+
+
+            .checkout-form-card,
+            .checkout-summary {
+                padding: 20px;
+            }
+
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+
+            .form-group.full {
+                grid-column: auto;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <main class="checkout-page">
+
+        <div class="checkout-container">
+
+
+            <!-- HEADING -->
+
+            <header class="checkout-heading">
+
+                <span>Secure Checkout</span>
+
+                <h1>
+                    Complete Your Order
+                </h1>
+
+                <p>
+                    Enter your details and delivery address.
+                </p>
+
+            </header>
+
+
+            <!-- EMPTY -->
+
+            <section
+                class="checkout-empty"
+                id="checkoutEmpty"
+            >
+
+                <h2>
+                    Your Cart is Empty
+                </h2>
+
+                <p>
+                    Add a saree to your cart before continuing.
+                </p>
+
+                <a href="shop.html">
+                    Explore Sarees →
+                </a>
+
+            </section>
+
+
+            <!-- CHECKOUT -->
+
+            <section
+                class="checkout-layout"
+                id="checkoutLayout"
+            >
+
+
+                <!-- FORM -->
+
+                <div class="checkout-form-card">
+
+
+                    <!-- CUSTOMER -->
+
+                    <section class="form-section">
+
+                        <h2 class="section-title">
+                            Contact Information
+                        </h2>
+
+
+                        <div class="form-grid">
+
+
+                            <div class="form-group">
+
+                                <label for="customerName">
+                                    Full Name
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="customerName"
+                                    placeholder="Enter your full name"
+                                    autocomplete="name"
+                                >
+
+                                <small
+                                    class="field-error"
+                                    id="nameError"
+                                >
+                                    Please enter your name.
+                                </small>
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label for="customerPhone">
+                                    Mobile Number
+                                </label>
+
+                                <input
+                                    type="tel"
+                                    id="customerPhone"
+                                    maxlength="10"
+                                    inputmode="numeric"
+                                    placeholder="10-digit mobile number"
+                                    autocomplete="tel"
+                                >
+
+                                <small
+                                    class="field-error"
+                                    id="phoneError"
+                                >
+                                    Enter a valid 10-digit mobile number.
+                                </small>
+
+                            </div>
+
+
+                        </div>
+
+                    </section>
+
+
+                    <!-- ADDRESS -->
+
+                    <section class="form-section">
+
+                        <h2 class="section-title">
+                            Delivery Address
+                        </h2>
+
+
+                        <div class="form-grid">
+
+
+                            <div class="form-group full">
+
+                                <label for="addressLine">
+                                    House / Flat / Street
+                                </label>
+
+                                <textarea
+                                    id="addressLine"
+                                    placeholder="House number, street, area"
+                                ></textarea>
+
+                                <small
+                                    class="field-error"
+                                    id="addressError"
+                                >
+                                    Please enter your address.
+                                </small>
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label for="city">
+                                    City
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="city"
+                                    placeholder="City"
+                                    autocomplete="address-level2"
+                                >
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label for="state">
+                                    State
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="state"
+                                    placeholder="State"
+                                    autocomplete="address-level1"
+                                >
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label for="pincode">
+                                    PIN Code
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="pincode"
+                                    maxlength="6"
+                                    inputmode="numeric"
+                                    placeholder="6-digit PIN"
+                                    autocomplete="postal-code"
+                                >
+
+                                <small
+                                    class="field-error"
+                                    id="pincodeError"
+                                >
+                                    Enter a valid 6-digit PIN code.
+                                </small>
+
+                            </div>
+
+
+                        </div>
+
+                    </section>
+
+
+                    <!-- PAYMENT -->
+
+                    <section class="form-section">
+
+                        <h2 class="section-title">
+                            Payment Method
+                        </h2>
+
+
+                        <div class="payment-options">
+
+
+                            <label class="payment-option">
+
+                                <input
+                                    type="radio"
+                                    name="paymentMethod"
+                                    value="online"
+                                    checked
+                                >
+
+
+                                <div class="payment-content">
+
+                                    <strong>
+                                        Online Payment
+                                    </strong>
+
+                                    <small>
+                                        UPI, Cards & Net Banking
+                                    </small>
+
+                                </div>
+
+                            </label>
+
+
+                            <label class="payment-option">
+
+                                <input
+                                    type="radio"
+                                    name="paymentMethod"
+                                    value="cod"
+                                >
+
+
+                                <div class="payment-content">
+
+                                    <strong>
+                                        Cash on Delivery
+                                    </strong>
+
+                                    <small>
+                                        COD eligibility will be checked before order confirmation.
+                                    </small>
+
+                                </div>
+
+                            </label>
+
+
+                        </div>
+
+
+                        <div
+                            class="cod-message"
+                            id="codMessage"
+                        >
+                            COD availability is subject to product,
+                            order value and delivery serviceability.
+                        </div>
+
+                    </section>
+
+
+                </div>
+
+
+                <!-- SUMMARY -->
+
+                <aside class="checkout-summary">
+
+
+                    <h2>
+                        Your Order
+                    </h2>
+
+
+                    <div
+                        class="summary-items"
+                        id="summaryItems"
+                    ></div>
+
+
+                    <div class="summary-row">
+
+                        <span>
+                            Items
+                        </span>
+
+                        <strong id="summaryQuantity">
+                            0
+                        </strong>
+
+                    </div>
+
+
+                    <div class="summary-row">
+
+                        <span>
+                            Subtotal
+                        </span>
+
+                        <strong id="summarySubtotal">
+                            ₹0
+                        </strong>
+
+                    </div>
+
+
+                    <div class="summary-row">
+
+                        <span>
+                            Delivery
+                        </span>
+
+                        <strong>
+                            Calculated after PIN check
+                        </strong>
+
+                    </div>
+
+
+                    <div class="summary-total">
+
+                        <span>
+                            Total
+                        </span>
+
+                        <strong id="summaryTotal">
+                            ₹0
+                        </strong>
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        class="place-order-btn"
+                        id="placeOrderBtn"
+                    >
+                        Place Order
+                    </button>
+
+
+                    <a
+                        href="cart.html"
+                        class="back-cart"
+                    >
+                        ← Back to Cart
+                    </a>
+
+                </aside>
+
+
+            </section>
+
+        </div>
+
+    </main>
+
+
+    <footer class="checkout-footer">
+
+        <h3>
+            Muskan Vastralok
+        </h3>
+
+        <p>
+            Timeless sarees, thoughtfully selected
+            for every celebration.
+        </p>
+
+    </footer>
+
+
+    <script src="JS/checkout.js"></script>
+
+</body>
+
+</html>
